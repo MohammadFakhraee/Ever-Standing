@@ -420,28 +420,28 @@ shape = SubResource("CircleShape2D_036fk")
 
 [node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("92_wlq4n")
-initial_state = NodePath("EnemyIdle")
+initial_state = NodePath("Idle")
 
-[node name="EnemyIdle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("notice_area", "enemy")]
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("notice_area", "enemy")]
 script = ExtResource("92_ovaht")
 notice_area = NodePath("../../Areas/NoticeArea")
 enemy = NodePath("../..")
 
-[node name="EnemyWander" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("notice_area", "enemy")]
+[node name="Wander" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("notice_area", "enemy")]
 script = ExtResource("93_d7ma8")
 notice_area = NodePath("../../Areas/NoticeArea")
 min_speed = 50.0
 max_speed = 80.0
 enemy = NodePath("../..")
 
-[node name="EnemyChasing" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("notice_area", "attack_area", "enemy")]
+[node name="Chase" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("notice_area", "attack_area", "enemy")]
 script = ExtResource("94_y3dk6")
 notice_area = NodePath("../../Areas/NoticeArea")
 attack_area = NodePath("../../Areas/AttackArea")
 enemy = NodePath("../..")
 speed = 100.0
 
-[node name="EnemyAttack" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("attack_area", "enemy")]
+[node name="Attack" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("attack_area", "enemy")]
 script = ExtResource("95_qrk8x")
 attack_area = NodePath("../../Areas/AttackArea")
 enemy = NodePath("../..")

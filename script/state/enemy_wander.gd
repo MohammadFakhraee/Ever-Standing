@@ -7,12 +7,12 @@ class_name EnemyWander
 @export var max_speed: float = 0.0
 @export var min_wander_time: float = 1.0
 @export var max_wander_time: float = 1.0
-@export var enemy: CharacterBody2D
 
-var move_direction: Vector2
-var speed: float = 10.0
 var wander_timer: float
 
+
+func _init():
+	state_name = "EnemyWander"
 
 func enter():
 	animate_sprite.emit("wander")
@@ -34,12 +34,11 @@ func update(delta: float):
 
 func physics_update(_delta: float):
 	if enemy:
-		print("enemy wander physics")
-		enemy.velocity = move_direction * speed
+		enemy.velocity = direction * speed
 
 
 func set_speed_and_direction():
-	move_direction = Vector2(randf_range(-1,1),randf_range(-1,1)).normalized()
+	direction = Vector2(randf_range(-1,1),randf_range(-1,1)).normalized()
 	speed = randf_range(min_speed,max_speed)
 
 

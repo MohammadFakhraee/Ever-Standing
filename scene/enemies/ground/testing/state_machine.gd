@@ -12,7 +12,7 @@ func _ready():
 	for state in get_children():
 		state.connect("transition", _on_state_transition)
 		state.connect("animate_sprite", _on_state_animate_sprite)
-		state_list[state.name] = state
+		state_list[state.state_name] = state
 	current_state = initial_state
 	current_state.enter()
 

@@ -3,10 +3,10 @@ class_name EnemyChasing
 
 @export var notice_area: Area2D
 @export var attack_area: Area2D
-@export var enemy: CharacterBody2D
 
-@export var speed: float = 20.0
-var direction: Vector2
+
+func _init():
+	state_name = "EnemyChasing"
 
 
 func enter():
