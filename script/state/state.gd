@@ -2,6 +2,7 @@ extends Node
 class_name State
 
 signal transition(new_state_name: String)
+signal animate_sprite(animation_name: String)
 
 func enter() -> void:
 	pass

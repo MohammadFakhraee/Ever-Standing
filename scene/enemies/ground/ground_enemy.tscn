@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dllh8qd4p1ih5"]
+
+[ext_resource type="PackedScene" uid="uid://bfwysmhd43rf4" path="res://scene/enemies/base/enemy.tscn" id="1_oq0wx"]
+[ext_resource type="Script" path="res://scene/enemies/ground/ground_enemy.gd" id="2_sjgj0"]
+
+[node name="GroundEnemy" instance=ExtResource("1_oq0wx")]
+collision_layer = 2
+collision_mask = 56
+script = ExtResource("2_sjgj0")
+
+[node name="NoticeArea" parent="Areas" index="0"]
+collision_layer = 128
+collision_mask = 1
+
+[node name="AttackArea" parent="Areas" index="1"]
+collision_layer = 128
+collision_mask = 1

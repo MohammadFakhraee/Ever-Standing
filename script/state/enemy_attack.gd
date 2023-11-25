@@ -3,10 +3,12 @@ class_name EnemyAttack
 
 @export var attack_area: Area2D
 @export var firing_cooldown: float = 1.0
+@export var enemy: CharacterBody2D
 
 var cooldown_updater: float = firing_cooldown
 
 func enter():
+	animate_sprite.emit("attack")
 	if attack_area:
 		attack_area.connect("body_exited",_on_attack_area_body_exited)
 	start_next_attack()
@@ -18,6 +20,8 @@ func exit():
 
 
 func update(delta: float):
+	if enemy:
+		enemy.velocity = Vector2.ZERO
 	if cooldown_updater > 0: cooldown_updater -= delta
 	else: attack_and_start_next_attack()
 
@@ -34,5 +38,5 @@ func attack():
 func start_next_attack():
 	cooldown_updater = firing_cooldown
 
-func _on_attack_area_body_exited():
+func _on_attack_area_body_exited(_body):
 	transition.emit("EnemyChasing")

@@ -2,12 +2,14 @@ extends State
 class_name EnemyIdle
 
 @export var notice_area: Area2D
-@export var rand_idle_time_range: Range = Range.new()
-
+@export var min_idle_time: float = 1.0
+@export var max_idle_time: float = 1.0
+@export var enemy: CharacterBody2D
 var idle_timer: float
 
 
 func enter():
+	animate_sprite.emit("idle")
 	if notice_area:
 		notice_area.connect("body_entered", _on_notice_area_body_entered)
 	start_idle_time()
@@ -19,12 +21,12 @@ func exit():
 
 
 func start_idle_time():
-	var min_time = rand_idle_time_range.min_value
-	var max_time = rand_idle_time_range.max_value
-	idle_timer = randf_range(min_time, max_time)
+	idle_timer = randf_range(min_idle_time, max_idle_time)
 
 
 func update(delta: float):
+	if enemy:
+		enemy.velocity = Vector2.ZERO
 	if idle_timer > 0: idle_timer -= delta
 	else: on_idle_time_timeout()
 

@@ -10,6 +10,7 @@ var direction: Vector2
 
 
 func enter():
+	animate_sprite.emit("chase")
 	if notice_area:
 		notice_area.connect("body_exited",_on_notice_area_body_exited)
 	
@@ -26,7 +27,7 @@ func exit():
 
 
 func update(_delta):
-	direction = (PlayerGlobals.global_position - enemy.global_position).normalized() * speed
+	direction = (PlayerGlobals.global_position - enemy.global_position).normalized()
 
 
 func physics_update(_delta):
@@ -34,7 +35,7 @@ func physics_update(_delta):
 		enemy.velocity = direction * speed
 
 
-func _on_attack_area_body_entered():
+func _on_attack_area_body_entered(_body):
 	transition.emit("EnemyAttack")
 
 

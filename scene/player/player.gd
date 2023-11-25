@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 250.0
 var direction: Vector2
 
-func _process(_delta):
+func _physics_process(_delta):
 	PlayerGlobals.global_position = global_position
 	
 	direction = Input.get_vector("Left","Right","Up","Down")
@@ -20,5 +20,3 @@ func _process(_delta):
 		$AnimatedSprite2D.play("run")
 	
 	move_and_slide()
-	
-	
