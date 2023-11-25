@@ -1,8 +1,8 @@
 extends State
 class_name EnemyChasing
 
-@export var notice_area: Area2D
-@export var attack_area: Area2D
+@export var notice_area: NoticeArea
+@export var attack_area: AttackArea
 
 
 func _init():

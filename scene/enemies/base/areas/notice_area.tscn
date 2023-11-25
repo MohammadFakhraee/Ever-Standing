@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://l8erkbg7j2pq"]
+
+[ext_resource type="Script" path="res://scene/enemies/base/areas/notice_area.gd" id="1_41e54"]
+
+[node name="NoticeArea" type="Area2D"]
+collision_layer = 128
+script = ExtResource("1_41e54")

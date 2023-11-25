@@ -1,7 +1,7 @@
 extends State
 class_name EnemyIdle
 
-@export var notice_area: Area2D
+@export var notice_area: NoticeArea
 @export var min_idle_time: float = 1.0
 @export var max_idle_time: float = 1.0
 var idle_timer: float

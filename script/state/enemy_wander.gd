@@ -1,7 +1,7 @@
 extends State
 class_name EnemyWander
 
-@export var notice_area: Area2D
+@export var notice_area: NoticeArea
 
 @export var min_speed: float = 0.0
 @export var max_speed: float = 0.0

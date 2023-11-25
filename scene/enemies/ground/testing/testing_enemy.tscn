@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://cv4tc1swyosbq"]
+[gd_scene load_steps=98 format=3 uid="uid://cv4tc1swyosbq"]
 
 [ext_resource type="PackedScene" uid="uid://dllh8qd4p1ih5" path="res://scene/enemies/ground/ground_enemy.tscn" id="1_mrq32"]
 [ext_resource type="Texture2D" uid="uid://bwiy2ao1pnjsc" path="res://graphic/warriors/warrior01/Attack_1/0_Warrior_Attack_1_000.png" id="2_i8byu"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://bo0vqn35htipc" path="res://graphic/warriors/warrior01/Attack_1/0_Warrior_Attack_1_014.png" id="16_o1l5s"]
 [ext_resource type="Texture2D" uid="uid://de4q2piy31a2f" path="res://graphic/warriors/warrior01/Idle Blinking/0_Warrior_Idle Blinking_014.png" id="16_vah85"]
 [ext_resource type="Texture2D" uid="uid://b4wloks3fncpy" path="res://graphic/warriors/warrior01/Run/0_Warrior_Run_000.png" id="17_al5ma"]
+[ext_resource type="Texture2D" uid="uid://ey135mibmmrn" path="res://graphic/warriors/warrior01/Idle/0_Warrior_Idle_000.png" id="17_bec6c"]
 [ext_resource type="Texture2D" uid="uid://cvf3q216r83er" path="res://graphic/warriors/warrior01/Idle Blinking/0_Warrior_Idle Blinking_015.png" id="17_xilaw"]
 [ext_resource type="Texture2D" uid="uid://de5jrlbvxvr0n" path="res://graphic/warriors/warrior01/Run/0_Warrior_Run_001.png" id="18_u263r"]
 [ext_resource type="Texture2D" uid="uid://5sk3y0giac4q" path="res://graphic/warriors/warrior01/Idle Blinking/0_Warrior_Idle Blinking_016.png" id="18_xfxyj"]
@@ -91,11 +92,6 @@
 [ext_resource type="Texture2D" uid="uid://g51rx312wp3g" path="res://graphic/warriors/warrior01/Walk/0_Warrior_Walk_027.png" id="89_ghurg"]
 [ext_resource type="Texture2D" uid="uid://br6k3357l1hl4" path="res://graphic/warriors/warrior01/Walk/0_Warrior_Walk_028.png" id="90_7vnrl"]
 [ext_resource type="Texture2D" uid="uid://dkv7b8fad0188" path="res://graphic/warriors/warrior01/Walk/0_Warrior_Walk_029.png" id="91_5regm"]
-[ext_resource type="Script" path="res://script/state/enemy_idle.gd" id="92_ovaht"]
-[ext_resource type="Script" path="res://scene/enemies/ground/testing/state_machine.gd" id="92_wlq4n"]
-[ext_resource type="Script" path="res://script/state/enemy_wander.gd" id="93_d7ma8"]
-[ext_resource type="Script" path="res://script/state/enemy_chasing.gd" id="94_y3dk6"]
-[ext_resource type="Script" path="res://script/state/enemy_attack.gd" id="95_qrk8x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dnb2c"]
 animations = [{
@@ -144,8 +140,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("16_o1l5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_bec6c")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 35.0
 }, {
@@ -394,54 +393,41 @@ animations = [{
 radius = 54.0
 height = 166.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_d2igw"]
-radius = 668.431
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5x2l"]
+size = Vector2(122, 180)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_036fk"]
-radius = 69.0072
+[sub_resource type="CircleShape2D" id="CircleShape2D_g5xux"]
+radius = 706.459
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hp2cr"]
+radius = 85.6154
 
 [node name="TestingEnemy" instance=ExtResource("1_mrq32")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_dnb2c")
-animation = &"attack"
-frame = 10
-frame_progress = 0.449696
+animation = &"idle"
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_mi0c1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/NoticeArea" index="0"]
-shape = SubResource("CircleShape2D_d2igw")
+[node name="CollisionShape2D" parent="Areas/HitboxArea" index="0"]
+shape = SubResource("RectangleShape2D_t5x2l")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AttackArea" index="0"]
-shape = SubResource("CircleShape2D_036fk")
+[node name="CollisionShape2D" parent="Areas/NoticeArea" index="0"]
+shape = SubResource("CircleShape2D_g5xux")
 
-[node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("92_wlq4n")
-initial_state = NodePath("Idle")
+[node name="CollisionShape2D" parent="Areas/AttackArea" index="0"]
+shape = SubResource("CircleShape2D_hp2cr")
 
-[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("notice_area", "enemy")]
-script = ExtResource("92_ovaht")
-notice_area = NodePath("../../Areas/NoticeArea")
-enemy = NodePath("../..")
+[node name="EnemyIdle" parent="StateMachine" index="0"]
+min_idle_time = 0.5
 
-[node name="Wander" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("notice_area", "enemy")]
-script = ExtResource("93_d7ma8")
-notice_area = NodePath("../../Areas/NoticeArea")
+[node name="EnemyWander" parent="StateMachine" index="1"]
 min_speed = 50.0
 max_speed = 80.0
-enemy = NodePath("../..")
+max_wander_time = 2.0
 
-[node name="Chase" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("notice_area", "attack_area", "enemy")]
-script = ExtResource("94_y3dk6")
-notice_area = NodePath("../../Areas/NoticeArea")
-attack_area = NodePath("../../Areas/AttackArea")
-enemy = NodePath("../..")
+[node name="EnemyChasing" parent="StateMachine" index="2"]
 speed = 100.0
-
-[node name="Attack" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("attack_area", "enemy")]
-script = ExtResource("95_qrk8x")
-attack_area = NodePath("../../Areas/AttackArea")
-enemy = NodePath("../..")

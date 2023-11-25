@@ -1,7 +1,7 @@
 extends State
 class_name EnemyAttack
 
-@export var attack_area: Area2D
+@export var attack_area: AttackArea
 @export var firing_cooldown: float = 1.0
 
 var cooldown_updater: float = firing_cooldown
@@ -13,10 +13,9 @@ func _init():
 func enter():
 	speed = 0.0
 	direction = Vector2.ZERO
-	animate_sprite.emit("attack")
 	if attack_area:
 		attack_area.connect("body_exited",_on_attack_area_body_exited)
-	start_next_attack()
+	attack_and_start_next_attack()
 
 
 func exit():
@@ -37,6 +36,7 @@ func attack_and_start_next_attack():
 
 
 func attack():
+	animate_sprite.emit("attack")
 	pass # call attack method on enemy (or attack component)
 
 

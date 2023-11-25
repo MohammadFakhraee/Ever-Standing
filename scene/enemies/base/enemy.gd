@@ -11,3 +11,13 @@ func _physics_process(_delta):
 	elif velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
 	move_and_slide()
+
+
+func _on_health_component_damaged(attack):
+	$StateMachine.pause()
+	
+	$StateMachine.play()
+
+
+func _on_health_component_died():
+	pass # Replace with function body.
