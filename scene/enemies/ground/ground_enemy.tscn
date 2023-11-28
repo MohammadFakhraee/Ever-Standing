@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dllh8qd4p1ih5"]
+[gd_scene load_steps=9 format=3 uid="uid://dllh8qd4p1ih5"]
 
 [ext_resource type="PackedScene" uid="uid://bfwysmhd43rf4" path="res://scene/enemies/base/enemy.tscn" id="1_oq0wx"]
 [ext_resource type="Script" path="res://scene/enemies/ground/ground_enemy.gd" id="2_sjgj0"]
@@ -7,16 +7,17 @@
 [ext_resource type="Script" path="res://script/state/enemy_wander.gd" id="5_brvlp"]
 [ext_resource type="Script" path="res://script/state/enemy_chasing.gd" id="6_mshtk"]
 [ext_resource type="Script" path="res://script/state/enemy_attack.gd" id="7_ki3k4"]
+[ext_resource type="Script" path="res://script/state/enemy_hit.gd" id="8_2hf8o"]
 
 [node name="GroundEnemy" instance=ExtResource("1_oq0wx")]
 collision_layer = 2
 collision_mask = 24
 script = ExtResource("2_sjgj0")
 
-[node name="StateMachine" parent="." index="3" node_paths=PackedStringArray("initial_state", "animated_sprite")]
+[node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("animated_sprite", "initial_state")]
 script = ExtResource("3_fp1ts")
-initial_state = NodePath("EnemyIdle")
 animated_sprite = NodePath("../AnimatedSprite2D")
+initial_state = NodePath("EnemyIdle")
 
 [node name="EnemyIdle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("notice_area", "enemy")]
 script = ExtResource("4_qjl82")
@@ -37,4 +38,9 @@ enemy = NodePath("../..")
 [node name="EnemyAttack" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("attack_area", "enemy")]
 script = ExtResource("7_ki3k4")
 attack_area = NodePath("../../Areas/AttackArea")
+enemy = NodePath("../..")
+
+[node name="EnemyHit" type="Node" parent="StateMachine" index="4" node_paths=PackedStringArray("health_component", "enemy")]
+script = ExtResource("8_2hf8o")
+health_component = NodePath("../../HealthComponent")
 enemy = NodePath("../..")

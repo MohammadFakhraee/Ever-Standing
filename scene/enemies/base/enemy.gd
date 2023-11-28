@@ -14,9 +14,7 @@ func _physics_process(_delta):
 
 
 func _on_health_component_damaged(attack):
-	$StateMachine.pause()
-	
-	$StateMachine.play()
+	pass
 
 
 func _on_health_component_died():

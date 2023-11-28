@@ -2,6 +2,8 @@ extends State
 class_name EnemyWander
 
 @export var notice_area: NoticeArea
+@export var notice_enter_state: String = "EnemyChasing"
+@export var wander_timeout_state: String = "EnemyWander"
 
 @export var min_speed: float = 0.0
 @export var max_speed: float = 0.0
@@ -15,6 +17,7 @@ func _init():
 	state_name = "EnemyWander"
 
 func enter():
+	super.enter()
 	animate_sprite.emit("wander")
 	if notice_area:
 		notice_area.connect("body_entered", _on_notice_area_body_entered)
@@ -23,6 +26,7 @@ func enter():
 
 
 func exit():
+	super.exit()
 	if notice_area and notice_area.is_connected("body_entered", _on_notice_area_body_entered):
 		notice_area.disconnect("body_entered", _on_notice_area_body_entered)
 
@@ -47,8 +51,8 @@ func start_wander_time():
 
 
 func _on_notice_area_body_entered(_body):
-	transition.emit("EnemyChasing")
+	transition.emit(notice_enter_state)
 
 
 func on_wander_time_timeout():
-	transition.emit("EnemyIdle")
+	transition.emit(wander_timeout_state)

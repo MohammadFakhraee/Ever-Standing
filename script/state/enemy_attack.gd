@@ -2,6 +2,7 @@ extends State
 class_name EnemyAttack
 
 @export var attack_area: AttackArea
+@export var attack_exit_state: String = "EnemyChasing"
 @export var firing_cooldown: float = 1.0
 
 var cooldown_updater: float = firing_cooldown
@@ -11,6 +12,7 @@ func _init():
 	state_name = "EnemyAttack"
 
 func enter():
+	super.enter()
 	speed = 0.0
 	direction = Vector2.ZERO
 	if attack_area:
@@ -19,6 +21,7 @@ func enter():
 
 
 func exit():
+	super.exit()
 	if attack_area and attack_area.is_connected("body_exited",_on_attack_area_body_exited):
 		attack_area.disconnect("body_exited",_on_attack_area_body_exited)
 
@@ -44,4 +47,4 @@ func start_next_attack():
 	cooldown_updater = firing_cooldown
 
 func _on_attack_area_body_exited(_body):
-	transition.emit("EnemyChasing")
+	transition.emit(attack_exit_state)
