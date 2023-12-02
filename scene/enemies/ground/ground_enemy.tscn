@@ -27,6 +27,7 @@ enemy = NodePath("../..")
 [node name="EnemyWander" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("notice_area", "enemy")]
 script = ExtResource("5_brvlp")
 notice_area = NodePath("../../Areas/NoticeArea")
+wander_timeout_state = "EnemyIdle"
 enemy = NodePath("../..")
 
 [node name="EnemyChasing" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("notice_area", "attack_area", "enemy")]

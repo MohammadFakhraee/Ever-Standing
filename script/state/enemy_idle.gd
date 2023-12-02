@@ -32,12 +32,14 @@ func start_idle_time():
 
 
 func update(delta: float):
+	super.update(delta)
 	enemy.velocity = direction * speed
 	if idle_timer > 0: idle_timer -= delta
 	else: on_idle_time_timeout()
 
 
-func physics_update(_delta: float):
+func physics_update(delta: float):
+	super.physics_update(delta)
 	pass
 
 

@@ -30,11 +30,13 @@ func exit():
 		attack_area.disconnect("body_entered", _on_attack_area_body_entered)
 
 
-func update(_delta):
+func update(delta):
+	super.update(delta)
 	direction = (PlayerGlobals.global_position - enemy.global_position).normalized()
 
 
-func physics_update(_delta):
+func physics_update(delta):
+	super.physics_update(delta)
 	if enemy:
 		enemy.velocity = direction * speed
 

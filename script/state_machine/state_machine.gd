@@ -12,6 +12,7 @@ func _ready():
 	for state in get_children():
 		state.connect("transition", _on_state_transition)
 		state.connect("animate_sprite", _on_state_animate_sprite)
+		state.connect("animation_flip", _on_animation_flip)
 		state_list[state.state_name] = state
 	current_state = initial_state
 	current_state.enter()
@@ -35,3 +36,7 @@ func _on_state_transition(state_name: String):
 
 func _on_state_animate_sprite(animation_name: String):
 	animated_sprite.play(animation_name)
+
+
+func _on_animation_flip(flip_h: bool, _flip_v: bool):
+	animated_sprite.flip_h = flip_h

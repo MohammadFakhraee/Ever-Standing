@@ -27,10 +27,15 @@ func exit():
 
 
 func update(delta: float):
-	if enemy:
-		enemy.velocity = direction * speed
+	super.update(delta)
 	if cooldown_updater > 0: cooldown_updater -= delta
 	else: attack_and_start_next_attack()
+
+
+func physics_update(delta):
+	super.physics_update(delta)
+	if enemy:
+		enemy.velocity = direction * speed
 
 
 func attack_and_start_next_attack():
@@ -48,3 +53,9 @@ func start_next_attack():
 
 func _on_attack_area_body_exited(_body):
 	transition.emit(attack_exit_state)
+
+
+func request_animation_flip():
+	var attack_direction = (PlayerGlobals.global_position - enemy.global_position).normalized()
+	if attack_direction.x < 0: animation_flip.emit(true, false)
+	elif attack_direction.x > 0: animation_flip.emit(false, false)

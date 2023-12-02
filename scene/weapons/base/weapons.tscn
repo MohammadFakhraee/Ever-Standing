@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c701ofo4wpwqp"]
+
+[ext_resource type="Script" path="res://scene/weapons/base/weapons.gd" id="1_370dy"]
+
+[node name="Weapons" type="PathFollow2D"]
+script = ExtResource("1_370dy")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 152
+
+[node name="WeaponSprite" type="Sprite2D" parent="HitArea"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

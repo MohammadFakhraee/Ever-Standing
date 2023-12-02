@@ -23,10 +23,15 @@ func exit():
 	super.exit()
 
 
-func update(_delta: float):
+func physics_update(delta: float):
+	super.physics_update(delta)
 	enemy.velocity = direction * speed
 
 
 func _on_health_component_died():
 	transition.emit(self.state_name)
 	health_component.disconnect("died", _on_health_component_died)
+
+
+func request_animation_flip():
+	pass

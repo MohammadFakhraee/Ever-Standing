@@ -6,14 +6,10 @@ class_name Enemy
 @export var dying_xp: int = 200
 
 func _physics_process(_delta):
-	if velocity.x < 0:
-		$AnimatedSprite2D.flip_h = true
-	elif velocity.x > 0:
-		$AnimatedSprite2D.flip_h = false
 	move_and_slide()
 
 
-func _on_health_component_damaged(attack):
+func _on_health_component_damaged(_attack):
 	pass
 
 

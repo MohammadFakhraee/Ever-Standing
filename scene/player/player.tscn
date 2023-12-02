@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://tg66su7iged8"]
+[gd_scene load_steps=81 format=3 uid="uid://tg66su7iged8"]
 
 [ext_resource type="Texture2D" uid="uid://ey135mibmmrn" path="res://graphic/warriors/warrior01/Idle/0_Warrior_Idle_000.png" id="1_0l5mt"]
 [ext_resource type="Script" path="res://scene/player/player.gd" id="1_ab6k8"]
@@ -76,6 +76,7 @@
 [ext_resource type="Texture2D" uid="uid://0ddwksna4fmr" path="res://graphic/warriors/warrior01/Run/0_Warrior_Run_012.png" id="73_uhv6t"]
 [ext_resource type="Texture2D" uid="uid://dspiy3dtnoa44" path="res://graphic/warriors/warrior01/Run/0_Warrior_Run_013.png" id="74_lvmhc"]
 [ext_resource type="Texture2D" uid="uid://ceetis801rwnu" path="res://graphic/warriors/warrior01/Run/0_Warrior_Run_014.png" id="75_u5fen"]
+[ext_resource type="PackedScene" uid="uid://bl3f6k1p4f1am" path="res://scene/weapons/knife/knife.tscn" id="77_smhfm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bjaou"]
 animations = [{
@@ -324,6 +325,12 @@ animations = [{
 radius = 39.0
 height = 120.0
 
+[sub_resource type="Curve2D" id="Curve2D_16mmx"]
+_data = {
+"points": PackedVector2Array(-24.3089, -0.198649, 24.3089, 0.198649, 0, -76, -8.96727, -11.4518, 8.96727, 11.4518, 56, -52, 0.471937, -25.0127, -0.471937, 25.0127, 76, 0, 11.4304, -12.7091, -11.4304, 12.7091, 54, 55, 18.4055, 0.28171, -18.4055, -0.28171, -1, 77, 13.2142, 13.6862, -13.2142, -13.6862, -52, 56, 0.471937, 20.2933, -0.471937, -20.2933, -76, 1, -18.1246, 18.7801, 18.1246, -18.7801, -53, -54, -5.18922, -0.0217469, 5.18922, 0.0217469, 0, -76)
+}
+point_count = 9
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 248
 safe_margin = 2.0
@@ -336,3 +343,11 @@ animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_bs3gr")
+
+[node name="WeaponsPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_16mmx")
+
+[node name="Knife" parent="WeaponsPath" instance=ExtResource("77_smhfm")]
+position = Vector2(76.0116, -1.671)
+rotation = 1.56811
+progress = 117.997

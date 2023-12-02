@@ -25,12 +25,13 @@ func exit():
 
 
 func update(delta: float):
-	nock_back_time -= delta
-	if nock_back_time <= 0:
-		transition.emit(fallback_state_name)
+	super.update(delta)
+	if nock_back_time > 0: nock_back_time -= delta
+	else: transition.emit(fallback_state_name)
 
 
 func physics_update(delta: float):
+	super.physics_update(delta)
 	enemy.velocity = direction.normalized() * speed
 
 
@@ -43,3 +44,7 @@ func _on_health_component_damaged(attack: Attack):
 func _on_health_component_died():
 	health_component.disconnect("damaged", _on_health_component_damaged)
 	health_component.disconnect("died", _on_health_component_died)
+
+
+func request_animation_flip():
+	pass

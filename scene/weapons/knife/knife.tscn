@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl3f6k1p4f1am"]
+
+[ext_resource type="PackedScene" uid="uid://c701ofo4wpwqp" path="res://scene/weapons/base/weapons.tscn" id="1_ja7h4"]
+[ext_resource type="Texture2D" uid="uid://vja1fqjveg3w" path="res://graphic/weapons/knives/Dagger.png" id="2_7u6ae"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj12x"]
+size = Vector2(10, 31)
+
+[node name="Knife" instance=ExtResource("1_ja7h4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
+shape = SubResource("RectangleShape2D_cj12x")
+
+[node name="WeaponSprite" parent="HitArea" index="1"]
+position = Vector2(0, 8)
+rotation = 0.785398
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_7u6ae")

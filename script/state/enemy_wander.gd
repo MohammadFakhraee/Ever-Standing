@@ -32,11 +32,13 @@ func exit():
 
 
 func update(delta: float):
+	super.update(delta)
 	if wander_timer > 0: wander_timer -= delta
 	else: on_wander_time_timeout()
 
 
-func physics_update(_delta: float):
+func physics_update(delta: float):
+	super.physics_update(delta)
 	if enemy:
 		enemy.velocity = direction * speed
 
