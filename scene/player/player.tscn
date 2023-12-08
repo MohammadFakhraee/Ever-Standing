@@ -348,6 +348,6 @@ shape = SubResource("CapsuleShape2D_bs3gr")
 curve = SubResource("Curve2D_16mmx")
 
 [node name="Knife" parent="WeaponsPath" instance=ExtResource("77_smhfm")]
-position = Vector2(76.0116, -1.671)
+position = Vector2(76.0116, -1.67058)
 rotation = 1.56811
 progress = 117.997

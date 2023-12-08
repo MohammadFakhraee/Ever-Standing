@@ -2,9 +2,10 @@ extends State
 class_name EnemyHit
 
 @export var health_component: HealthComponent
-@export var nock_back_time: float = 0.5
+@export var max_nock_back_time: float = 0.5
 @export var fallback_state_name: String = "EnemyIdle"
 
+var nock_back_time := 0.0
 
 func _init():
 	state_name = "EnemyHit"
@@ -17,7 +18,8 @@ func _ready():
 
 func enter():
 	super.enter()
-	animate_sprite.emit("died")
+	nock_back_time = max_nock_back_time
+	animate_sprite.emit("hit")
 
 
 func exit():

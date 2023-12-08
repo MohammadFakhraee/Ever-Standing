@@ -1,16 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfwysmhd43rf4"]
+[gd_scene load_steps=6 format=3 uid="uid://bfwysmhd43rf4"]
 
 [ext_resource type="Script" path="res://scene/enemies/base/enemy.gd" id="1_u6lr2"]
 [ext_resource type="Script" path="res://script/state_machine/state_machine.gd" id="2_8h0u6"]
-[ext_resource type="PackedScene" uid="uid://c53pptp17aa5" path="res://scene/enemies/base/areas/hitbox_area.tscn" id="2_mak1u"]
 [ext_resource type="PackedScene" uid="uid://l8erkbg7j2pq" path="res://scene/enemies/base/areas/notice_area.tscn" id="3_5f1ia"]
 [ext_resource type="PackedScene" uid="uid://bjuu6k5gyyix" path="res://scene/enemies/base/areas/attack_area.tscn" id="4_i6o51"]
 [ext_resource type="PackedScene" uid="uid://b267ofa5blird" path="res://scene/enemies/base/components/health_component.tscn" id="6_n77sf"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_u6lr2")
+health_component = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
@@ -19,11 +19,6 @@ script = ExtResource("1_u6lr2")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="Areas" type="Node2D" parent="."]
-
-[node name="HitboxArea" parent="Areas" node_paths=PackedStringArray("health_component") instance=ExtResource("2_mak1u")]
-health_component = NodePath("../../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HitboxArea"]
 
 [node name="NoticeArea" parent="Areas" instance=ExtResource("3_5f1ia")]
 

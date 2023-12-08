@@ -11,30 +11,35 @@ class_name EnemyWander
 @export var max_wander_time: float = 1.0
 
 var wander_timer: float
-
+var is_player_noticed := false
 
 func _init():
 	state_name = "EnemyWander"
 
+
+func _ready():
+	notice_area.connect("body_entered", _on_notice_area_body_entered)
+	notice_area.connect("body_exited", _on_notice_area_body_exited)
+
+
 func enter():
 	super.enter()
 	animate_sprite.emit("wander")
-	if notice_area:
-		notice_area.connect("body_entered", _on_notice_area_body_entered)
 	set_speed_and_direction()
 	start_wander_time()
 
 
 func exit():
 	super.exit()
-	if notice_area and notice_area.is_connected("body_entered", _on_notice_area_body_entered):
-		notice_area.disconnect("body_entered", _on_notice_area_body_entered)
 
 
 func update(delta: float):
 	super.update(delta)
-	if wander_timer > 0: wander_timer -= delta
-	else: on_wander_time_timeout()
+	if is_player_noticed: 
+		transition.emit(notice_enter_state)
+	else: 
+		if wander_timer > 0: wander_timer -= delta
+		else: on_wander_time_timeout()
 
 
 func physics_update(delta: float):
@@ -53,7 +58,11 @@ func start_wander_time():
 
 
 func _on_notice_area_body_entered(_body):
-	transition.emit(notice_enter_state)
+	is_player_noticed = true
+
+
+func _on_notice_area_body_exited(_body):
+	is_player_noticed = false
 
 
 func on_wander_time_timeout():

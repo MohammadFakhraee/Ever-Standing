@@ -1,12 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bl3f6k1p4f1am"]
+[gd_scene load_steps=7 format=3 uid="uid://bl3f6k1p4f1am"]
 
 [ext_resource type="PackedScene" uid="uid://c701ofo4wpwqp" path="res://scene/weapons/base/weapons.tscn" id="1_ja7h4"]
+[ext_resource type="Script" path="res://scene/weapons/knife/knife.gd" id="2_1f2p4"]
 [ext_resource type="Texture2D" uid="uid://vja1fqjveg3w" path="res://graphic/weapons/knives/Dagger.png" id="2_7u6ae"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cj12x"]
 size = Vector2(10, 31)
 
+[sub_resource type="Animation" id="Animation_ve52n"]
+resource_name = "Attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fmve8"]
+_data = {
+"Attack": SubResource("Animation_ve52n")
+}
+
 [node name="Knife" instance=ExtResource("1_ja7h4")]
+script = ExtResource("2_1f2p4")
+weapon_range = 100.0
+damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
 shape = SubResource("RectangleShape2D_cj12x")
@@ -16,3 +28,10 @@ position = Vector2(0, 8)
 rotation = 0.785398
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_7u6ae")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_fmve8")
+}
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
