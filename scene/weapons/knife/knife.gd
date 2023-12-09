@@ -15,6 +15,7 @@ func _on_attack():
 func _on_hit_area_body_entered(body):
 	if is_attacking:
 		if body is Enemy and damaged_enemies < enemy_count:
+			print(body)
 			damaged_enemies += 1
 			body.damage(create_attack_entity())
 

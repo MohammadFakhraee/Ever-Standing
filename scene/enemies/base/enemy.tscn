@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bjuu6k5gyyix" path="res://scene/enemies/base/areas/attack_area.tscn" id="4_i6o51"]
 [ext_resource type="PackedScene" uid="uid://b267ofa5blird" path="res://scene/enemies/base/components/health_component.tscn" id="6_n77sf"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component") groups=["Enemy"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_u6lr2")

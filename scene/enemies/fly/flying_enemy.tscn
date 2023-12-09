@@ -3,10 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bfwysmhd43rf4" path="res://scene/enemies/base/enemy.tscn" id="1_2kh8i"]
 [ext_resource type="Script" path="res://scene/enemies/fly/flying_enemy.gd" id="2_ui8gu"]
 
-[node name="FlyingEnemy" instance=ExtResource("1_2kh8i")]
+[node name="FlyingEnemy" groups=["FlyEnemy"] instance=ExtResource("1_2kh8i")]
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("2_ui8gu")
-
-[node name="HitboxArea" parent="Areas" index="0"]
-collision_layer = 4

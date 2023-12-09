@@ -12,4 +12,3 @@ script = ExtResource("1_ik7i4")
 [node name="TestingEnemy" parent="." instance=ExtResource("3_lpgqx")]
 position = Vector2(897, 105)
 collision_mask = 56
-health = null

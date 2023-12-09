@@ -345,9 +345,9 @@ animation = &"idle"
 shape = SubResource("CapsuleShape2D_bs3gr")
 
 [node name="WeaponsPath" type="Path2D" parent="."]
+rotation = 1.5708
 curve = SubResource("Curve2D_16mmx")
 
 [node name="Knife" parent="WeaponsPath" instance=ExtResource("77_smhfm")]
-position = Vector2(76.0116, -1.67058)
-rotation = 1.56811
-progress = 117.997
+position = Vector2(0, -76)
+rotation = 0.00817158
